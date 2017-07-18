@@ -1,0 +1,18 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@using (Html.BeginForm("Index", "MultipleFile", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+<div class="form-group">
+
+    <div class="col-md-4">
+    </div>
+    <div class="col-md-6">
+        <input type="file" name="files" value="" multiple="multiple"/>
+    </div>
+    <input type="submit" value="Submit" />
+</div>
+}

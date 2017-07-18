@@ -1,0 +1,92 @@
+﻿<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.js"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script>
+    $(document).ready(function () {
+       
+        $.get("https://ipinfo.io/json", function (response) {
+            $("#ip").html("IP: " + response.ip);
+            $("#address").html("Location: " + response.city + ", " + response.region);
+            $("#details").html(JSON.stringify(response, null, 4));
+        }, "jsonp");
+
+
+
+        var list = [];
+        var array = [];
+        array = ['illustration', 'logo', 'art', 'painting', 'drawing', 'design', 'image', 'vector', 'clipart', 'icon'];
+        $("input[type=text]").change(function () {
+            
+            var dropdown = $("select option:selected").val();
+            var text = $(this).val();
+            if (dropdown != "" & text != "") {
+               
+                if (dropdown == "Outline") {
+                    array.push(dropdown.toLowerCase());
+                } else if (dropdown == "Fill") {
+                    array.push(dropdown.toLowerCase());
+                } else if (dropdown == "Color") {
+                    array.push(dropdown.toLowerCase());
+                    array.push("colorful");
+                    array.push("colored");
+                    array.push("colourful");
+                    array.push("coloured");
+                }
+                $.each(array, function (i, item) {
+                    list.push(text + " " + item);
+                });
+                $("input[type=text]").val(list+",");
+            }
+        });
+        $("select").change(function () {
+            $(this).prop("disabled", true);
+            
+        })
+        $("form").submit(function () {
+            var str = $("input[type=text]").val();
+            $("#strvalue").text(strReplaceAll(str, ',', '; '));
+            window.prompt("Press ctrl/cmd+c to copy text", $("#strvalue").text());
+            return false;
+        });
+        $("input[type=reset]").click(function () {
+            $("#strvalue").text("");
+            $("select").prop("disabled", false);
+            location.reload();
+           
+        })
+    });
+    function strReplaceAll(string, Find, Replace) {
+        try {
+            return string.replace(new RegExp(Find, "gi"), Replace);
+        } catch (ex) {
+            return string;
+        }
+    }
+</script>
+<form>
+    <div class="container" style="margin-top: 10px">
+        <div class="row">
+            <div class="form-group">
+                <select class="form-control">
+                    <option value="">select</option>
+                    <option value="Outline">Outline</option>
+                    <option value="Fill">Fill</option>
+                    <option value="Color">Color</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <input class="form-control" type="text" />
+            </div>
+        </div>
+        <div class="text-center">
+            <input type="submit" value="Submit" class="btn btn-primary" />
+            <input type="reset" value="Reset" class="btn btn-default" />
+        </div>
+        <div class="col-md-12" style="margin-top: 10px">
+            <span id="strvalue"></span>
+        </div>
+    </div>
+</form>

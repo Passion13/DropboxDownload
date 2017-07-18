@@ -1,0 +1,41 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.2.4.js"></script>
+ <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="stylesheet" type="text/css"/>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
+
+
+<script>
+    var source = [ { value: "www.foo.com",
+        label: "Spencer Kline"
+    },
+               { value: "www.example.com",
+                   label: "James Bond"
+               }
+               
+    ];
+    $(document).ready(function () {
+        $("input#autocomplete").autocomplete({
+            source: source,
+            select: function (event, ui) {
+                window.location.href = ui.item.value;
+            }
+        });
+    });
+</script>
+
+<div class="row">
+    <div class="col-md-12">
+        <h6>Datetimepicker</h6>
+
+        <div class="form-group">
+            <div class="input-group date" id="datetimepicker">
+                <input type="text" class="form-control" id="autocomplete" />
+                <span class="input-group-addon"><span class="glyphicon-calendar glyphicon"></span></span>
+            </div>
+        </div>
+    </div>
+</div>

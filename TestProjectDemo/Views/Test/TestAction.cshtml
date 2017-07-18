@@ -1,0 +1,16 @@
+﻿@{
+    ViewBag.Title = "TestAction";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    #abc {
+        color: #ccc;
+    }
+</style>
+@using (Html.BeginForm("test-action", "Test", FormMethod.Post, new { enctype = "multipart/form-data", id = "form" }))
+{
+    <h2 id="abc">TestAction</h2>
+    <input type="file" name="fileName" />
+    <input type="submit" />
+    @Html.Editor("Test")
+}

@@ -1,0 +1,95 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="AnantTestModelStoreContainer" CdmEntityContainer="AnantTestEntities">
+    <EntitySetMapping Name="RoleMasters">
+      <EntityTypeMapping TypeName="AnantTestModel.RoleMaster">
+        <MappingFragment StoreEntitySet="RoleMaster">
+          <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+          <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SmileStatusMasters">
+      <EntityTypeMapping TypeName="AnantTestModel.SmileStatusMaster">
+        <MappingFragment StoreEntitySet="SmileStatusMaster">
+          <ScalarProperty Name="SmileStatusId" ColumnName="SmileStatusId" />
+          <ScalarProperty Name="SmileStatus" ColumnName="SmileStatus" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserMasters">
+      <EntityTypeMapping TypeName="AnantTestModel.UserMaster">
+        <MappingFragment StoreEntitySet="UserMaster">
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="UserEmail" ColumnName="UserEmail" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserSmileMasters">
+      <EntityTypeMapping TypeName="AnantTestModel.UserSmileMaster">
+        <MappingFragment StoreEntitySet="UserSmileMaster">
+          <ScalarProperty Name="UserSmileId" ColumnName="UserSmileId" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="SmileMade" ColumnName="SmileMade" />
+          <ScalarProperty Name="IsTrue" ColumnName="IsTrue" />
+          <ScalarProperty Name="SmileStatusId" ColumnName="SmileStatusId" />
+          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserSmileTxns">
+      <EntityTypeMapping TypeName="AnantTestModel.UserSmileTxn">
+        <MappingFragment StoreEntitySet="UserSmileTxn">
+          <ScalarProperty Name="UserSmileTxnId" ColumnName="UserSmileTxnId" />
+          <ScalarProperty Name="UserSmileId" ColumnName="UserSmileId" />
+          <ScalarProperty Name="FileName" ColumnName="FileName" />
+          <ScalarProperty Name="FileContent" ColumnName="FileContent" />
+          <ScalarProperty Name="FileExtenstion" ColumnName="FileExtenstion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="Usp_Get_UserLogin" FunctionName="AnantTestModel.Store.Usp_Get_UserLogin">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="AnantTestModel.Usp_Get_UserLogin_Result">
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+          <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+          <ScalarProperty Name="UserEmail" ColumnName="UserEmail" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="Usp_GetAll_SmileStatusMaster" FunctionName="AnantTestModel.Store.Usp_GetAll_SmileStatusMaster">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="AnantTestModel.Usp_GetAll_SmileStatusMaster_Result">
+          <ScalarProperty Name="SmileStatusId" ColumnName="SmileStatusId" />
+          <ScalarProperty Name="SmileStatus" ColumnName="SmileStatus" />
+          <ScalarProperty Name="TotalCount" ColumnName="TotalCount" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="Usp_GetAll_UserSmileMaster" FunctionName="AnantTestModel.Store.Usp_GetAll_UserSmileMaster">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="AnantTestModel.Usp_GetAll_UserSmileMaster_Result">
+          <ScalarProperty Name="UserSmileId" ColumnName="UserSmileId" />
+          <ScalarProperty Name="FileContent" ColumnName="FileContent" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="SmileMade" ColumnName="SmileMade" />
+          <ScalarProperty Name="SmileStatusId" ColumnName="SmileStatusId" />
+          <ScalarProperty Name="TotalCount" ColumnName="TotalCount" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="Usp_IU_UserSmileMaster" FunctionName="AnantTestModel.Store.Usp_IU_UserSmileMaster" />
+    <FunctionImportMapping FunctionImportName="Usp_Update_UserPassword" FunctionName="AnantTestModel.Store.Usp_Update_UserPassword" />
+  </EntityContainerMapping>
+</Mapping>

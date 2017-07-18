@@ -1,0 +1,137 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="AnantTestModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="AnantTestModelStoreContainer">
+    <EntitySet Name="RoleMaster" EntityType="AnantTestModel.Store.RoleMaster" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="SmileStatusMaster" EntityType="AnantTestModel.Store.SmileStatusMaster" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="UserMaster" EntityType="AnantTestModel.Store.UserMaster" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="UserSmileMaster" EntityType="AnantTestModel.Store.UserSmileMaster" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="UserSmileTxn" EntityType="AnantTestModel.Store.UserSmileTxn" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="FK_UserMaster_RoleMaster" Association="AnantTestModel.Store.FK_UserMaster_RoleMaster">
+      <End Role="RoleMaster" EntitySet="RoleMaster" />
+      <End Role="UserMaster" EntitySet="UserMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserSmileMaster_SmileStatusMaster_SmileStatusId" Association="AnantTestModel.Store.FK_UserSmileMaster_SmileStatusMaster_SmileStatusId">
+      <End Role="SmileStatusMaster" EntitySet="SmileStatusMaster" />
+      <End Role="UserSmileMaster" EntitySet="UserSmileMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserSmileTxn_UserSmileMaster_UserSmileId" Association="AnantTestModel.Store.FK_UserSmileTxn_UserSmileMaster_UserSmileId">
+      <End Role="UserSmileMaster" EntitySet="UserSmileMaster" />
+      <End Role="UserSmileTxn" EntitySet="UserSmileTxn" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="RoleMaster">
+    <Key>
+      <PropertyRef Name="RoleId" />
+    </Key>
+    <Property Name="RoleId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="RoleName" Type="varchar" Nullable="false" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="SmileStatusMaster">
+    <Key>
+      <PropertyRef Name="SmileStatusId" />
+    </Key>
+    <Property Name="SmileStatusId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="SmileStatus" Type="varchar" Nullable="false" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="UserMaster">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="varchar" Nullable="false" MaxLength="200" />
+    <Property Name="UserEmail" Type="varchar" Nullable="false" MaxLength="250" />
+    <Property Name="Password" Type="nvarchar" Nullable="false" MaxLength="250" />
+    <Property Name="RoleId" Type="int" Nullable="false" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="UserSmileMaster">
+    <Key>
+      <PropertyRef Name="UserSmileId" />
+    </Key>
+    <Property Name="UserSmileId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="Email" Type="varchar" Nullable="false" MaxLength="100" />
+    <Property Name="City" Type="varchar" Nullable="false" MaxLength="100" />
+    <Property Name="SmileMade" Type="varchar" Nullable="false" MaxLength="500" />
+    <Property Name="IsTrue" Type="nchar" Nullable="false" MaxLength="10" />
+    <Property Name="SmileStatusId" Type="int" Nullable="false" />
+    <Property Name="DateCreated" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="UserSmileTxn">
+    <Key>
+      <PropertyRef Name="UserSmileTxnId" />
+    </Key>
+    <Property Name="UserSmileTxnId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="UserSmileId" Type="int" Nullable="false" />
+    <Property Name="FileName" Type="varchar" MaxLength="100" />
+    <Property Name="FileContent" Type="varbinary(max)" />
+    <Property Name="FileExtenstion" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <Association Name="FK_UserMaster_RoleMaster">
+    <End Role="RoleMaster" Type="AnantTestModel.Store.RoleMaster" Multiplicity="1" />
+    <End Role="UserMaster" Type="AnantTestModel.Store.UserMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="RoleMaster">
+        <PropertyRef Name="RoleId" />
+      </Principal>
+      <Dependent Role="UserMaster">
+        <PropertyRef Name="RoleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserSmileMaster_SmileStatusMaster_SmileStatusId">
+    <End Role="SmileStatusMaster" Type="AnantTestModel.Store.SmileStatusMaster" Multiplicity="1" />
+    <End Role="UserSmileMaster" Type="AnantTestModel.Store.UserSmileMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SmileStatusMaster">
+        <PropertyRef Name="SmileStatusId" />
+      </Principal>
+      <Dependent Role="UserSmileMaster">
+        <PropertyRef Name="SmileStatusId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserSmileTxn_UserSmileMaster_UserSmileId">
+    <End Role="UserSmileMaster" Type="AnantTestModel.Store.UserSmileMaster" Multiplicity="1" />
+    <End Role="UserSmileTxn" Type="AnantTestModel.Store.UserSmileTxn" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserSmileMaster">
+        <PropertyRef Name="UserSmileId" />
+      </Principal>
+      <Dependent Role="UserSmileTxn">
+        <PropertyRef Name="UserSmileId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="Usp_Get_UserLogin" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="UserEmail" Type="varchar" Mode="In" />
+    <Parameter Name="Password" Type="varchar" Mode="In" />
+    <Parameter Name="UserId" Type="int" Mode="In" />
+  </Function>
+  <Function Name="Usp_GetAll_SmileStatusMaster" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="SearchString" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="Usp_GetAll_UserSmileMaster" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="SmileStatusId" Type="int" Mode="In" />
+  </Function>
+  <Function Name="Usp_IU_UserSmileMaster" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="UserSmileId" Type="int" Mode="In" />
+    <Parameter Name="Name" Type="varchar" Mode="In" />
+    <Parameter Name="Email" Type="varchar" Mode="In" />
+    <Parameter Name="City" Type="varchar" Mode="In" />
+    <Parameter Name="SmileMade" Type="varchar" Mode="In" />
+    <Parameter Name="FileName" Type="varchar" Mode="In" />
+    <Parameter Name="FileContent" Type="varbinary(max)" Mode="In" />
+    <Parameter Name="FileExtenstion" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="Usp_Update_UserPassword" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="UserEmail" Type="varchar" Mode="In" />
+    <Parameter Name="Password" Type="varchar" Mode="In" />
+  </Function>
+  <!--Errors Found During Generation:
+      warning 6005: The function 'Usp_Update_UserSmileStatus' has a parameter 'SmileStatusList' at parameter index 1 that has a data type 'table type' which is currently not supported for the target .NET Framework version. The function was excluded.
+      
+      <Function Name="Usp_Update_UserSmileStatus" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+        <Parameter Name="ID" Type="int" Mode="In" />
+      </Function>-->
+</Schema>

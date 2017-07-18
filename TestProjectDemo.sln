@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestProjectDemo", "TestProjectDemo\TestProjectDemo.csproj", "{169F38C8-7121-4891-8B48-6C8D19BEC75A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dropbox.Api", "Dropbox.Api\Dropbox.Api.csproj", "{EBB6D7F7-2AFB-4942-AC32-38E8992657FE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OAuthProtocol", "OAuthProtocol\OAuthProtocol.csproj", "{0DBAC085-4AEA-41E8-B34C-97CA651879CE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{169F38C8-7121-4891-8B48-6C8D19BEC75A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{169F38C8-7121-4891-8B48-6C8D19BEC75A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{169F38C8-7121-4891-8B48-6C8D19BEC75A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{169F38C8-7121-4891-8B48-6C8D19BEC75A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EBB6D7F7-2AFB-4942-AC32-38E8992657FE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EBB6D7F7-2AFB-4942-AC32-38E8992657FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EBB6D7F7-2AFB-4942-AC32-38E8992657FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EBB6D7F7-2AFB-4942-AC32-38E8992657FE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0DBAC085-4AEA-41E8-B34C-97CA651879CE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0DBAC085-4AEA-41E8-B34C-97CA651879CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0DBAC085-4AEA-41E8-B34C-97CA651879CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0DBAC085-4AEA-41E8-B34C-97CA651879CE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

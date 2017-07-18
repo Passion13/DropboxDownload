@@ -1,0 +1,160 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="AnantTestModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="AnantTestEntities" p1:LazyLoadingEnabled="true">
+    <EntitySet Name="RoleMasters" EntityType="AnantTestModel.RoleMaster" />
+    <EntitySet Name="SmileStatusMasters" EntityType="AnantTestModel.SmileStatusMaster" />
+    <EntitySet Name="UserMasters" EntityType="AnantTestModel.UserMaster" />
+    <EntitySet Name="UserSmileMasters" EntityType="AnantTestModel.UserSmileMaster" />
+    <EntitySet Name="UserSmileTxns" EntityType="AnantTestModel.UserSmileTxn" />
+    <AssociationSet Name="FK_UserMaster_RoleMaster" Association="AnantTestModel.FK_UserMaster_RoleMaster">
+      <End Role="RoleMaster" EntitySet="RoleMasters" />
+      <End Role="UserMaster" EntitySet="UserMasters" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserSmileMaster_SmileStatusMaster_SmileStatusId" Association="AnantTestModel.FK_UserSmileMaster_SmileStatusMaster_SmileStatusId">
+      <End Role="SmileStatusMaster" EntitySet="SmileStatusMasters" />
+      <End Role="UserSmileMaster" EntitySet="UserSmileMasters" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserSmileTxn_UserSmileMaster_UserSmileId" Association="AnantTestModel.FK_UserSmileTxn_UserSmileMaster_UserSmileId">
+      <End Role="UserSmileMaster" EntitySet="UserSmileMasters" />
+      <End Role="UserSmileTxn" EntitySet="UserSmileTxns" />
+    </AssociationSet>
+    <FunctionImport Name="Usp_Get_UserLogin" ReturnType="Collection(AnantTestModel.Usp_Get_UserLogin_Result)">
+      <Parameter Name="UserEmail" Mode="In" Type="String" />
+      <Parameter Name="Password" Mode="In" Type="String" />
+      <Parameter Name="UserId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="Usp_GetAll_SmileStatusMaster" ReturnType="Collection(AnantTestModel.Usp_GetAll_SmileStatusMaster_Result)">
+      <Parameter Name="SearchString" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="Usp_GetAll_UserSmileMaster" ReturnType="Collection(AnantTestModel.Usp_GetAll_UserSmileMaster_Result)">
+      <Parameter Name="SmileStatusId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="Usp_IU_UserSmileMaster" ReturnType="Collection(Int32)">
+      <Parameter Name="UserSmileId" Mode="In" Type="Int32" />
+      <Parameter Name="Name" Mode="In" Type="String" />
+      <Parameter Name="Email" Mode="In" Type="String" />
+      <Parameter Name="City" Mode="In" Type="String" />
+      <Parameter Name="SmileMade" Mode="In" Type="String" />
+      <Parameter Name="FileName" Mode="In" Type="String" />
+      <Parameter Name="FileContent" Mode="In" Type="Binary" />
+      <Parameter Name="FileExtenstion" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="Usp_Update_UserPassword">
+      <Parameter Name="UserEmail" Mode="In" Type="String" />
+      <Parameter Name="Password" Mode="In" Type="String" />
+    </FunctionImport>
+  </EntityContainer>
+  <EntityType Name="RoleMaster">
+    <Key>
+      <PropertyRef Name="RoleId" />
+    </Key>
+    <Property Name="RoleId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="RoleName" Type="String" Nullable="false" MaxLength="100" Unicode="false" FixedLength="false" />
+    <NavigationProperty Name="UserMasters" Relationship="AnantTestModel.FK_UserMaster_RoleMaster" FromRole="RoleMaster" ToRole="UserMaster" />
+  </EntityType>
+  <EntityType Name="SmileStatusMaster">
+    <Key>
+      <PropertyRef Name="SmileStatusId" />
+    </Key>
+    <Property Name="SmileStatusId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="SmileStatus" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+    <NavigationProperty Name="UserSmileMasters" Relationship="AnantTestModel.FK_UserSmileMaster_SmileStatusMaster_SmileStatusId" FromRole="SmileStatusMaster" ToRole="UserSmileMaster" />
+  </EntityType>
+  <EntityType Name="UserMaster">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="200" Unicode="false" FixedLength="false" />
+    <Property Name="UserEmail" Type="String" Nullable="false" MaxLength="250" Unicode="false" FixedLength="false" />
+    <Property Name="Password" Type="String" Nullable="false" MaxLength="250" Unicode="true" FixedLength="false" />
+    <Property Name="RoleId" Type="Int32" Nullable="false" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="RoleMaster" Relationship="AnantTestModel.FK_UserMaster_RoleMaster" FromRole="UserMaster" ToRole="RoleMaster" />
+  </EntityType>
+  <EntityType Name="UserSmileMaster">
+    <Key>
+      <PropertyRef Name="UserSmileId" />
+    </Key>
+    <Property Name="UserSmileId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="Email" Type="String" Nullable="false" MaxLength="100" Unicode="false" FixedLength="false" />
+    <Property Name="City" Type="String" Nullable="false" MaxLength="100" Unicode="false" FixedLength="false" />
+    <Property Name="SmileMade" Type="String" Nullable="false" MaxLength="500" Unicode="false" FixedLength="false" />
+    <Property Name="IsTrue" Type="String" Nullable="false" MaxLength="10" Unicode="true" FixedLength="true" />
+    <Property Name="SmileStatusId" Type="Int32" Nullable="false" />
+    <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="SmileStatusMaster" Relationship="AnantTestModel.FK_UserSmileMaster_SmileStatusMaster_SmileStatusId" FromRole="UserSmileMaster" ToRole="SmileStatusMaster" />
+    <NavigationProperty Name="UserSmileTxns" Relationship="AnantTestModel.FK_UserSmileTxn_UserSmileMaster_UserSmileId" FromRole="UserSmileMaster" ToRole="UserSmileTxn" />
+  </EntityType>
+  <EntityType Name="UserSmileTxn">
+    <Key>
+      <PropertyRef Name="UserSmileTxnId" />
+    </Key>
+    <Property Name="UserSmileTxnId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="UserSmileId" Type="Int32" Nullable="false" />
+    <Property Name="FileName" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+    <Property Name="FileContent" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="FileExtenstion" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+    <NavigationProperty Name="UserSmileMaster" Relationship="AnantTestModel.FK_UserSmileTxn_UserSmileMaster_UserSmileId" FromRole="UserSmileTxn" ToRole="UserSmileMaster" />
+  </EntityType>
+  <Association Name="FK_UserMaster_RoleMaster">
+    <End Role="RoleMaster" Type="AnantTestModel.RoleMaster" Multiplicity="1" />
+    <End Role="UserMaster" Type="AnantTestModel.UserMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="RoleMaster">
+        <PropertyRef Name="RoleId" />
+      </Principal>
+      <Dependent Role="UserMaster">
+        <PropertyRef Name="RoleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserSmileMaster_SmileStatusMaster_SmileStatusId">
+    <End Role="SmileStatusMaster" Type="AnantTestModel.SmileStatusMaster" Multiplicity="1" />
+    <End Role="UserSmileMaster" Type="AnantTestModel.UserSmileMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SmileStatusMaster">
+        <PropertyRef Name="SmileStatusId" />
+      </Principal>
+      <Dependent Role="UserSmileMaster">
+        <PropertyRef Name="SmileStatusId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserSmileTxn_UserSmileMaster_UserSmileId">
+    <End Role="UserSmileMaster" Type="AnantTestModel.UserSmileMaster" Multiplicity="1" />
+    <End Role="UserSmileTxn" Type="AnantTestModel.UserSmileTxn" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserSmileMaster">
+        <PropertyRef Name="UserSmileId" />
+      </Principal>
+      <Dependent Role="UserSmileTxn">
+        <PropertyRef Name="UserSmileId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <ComplexType Name="Usp_Get_UserLogin_Result">
+    <Property Type="Int32" Name="UserId" Nullable="false" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="200" />
+    <Property Type="Int32" Name="RoleId" Nullable="false" />
+    <Property Type="String" Name="RoleName" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="UserEmail" Nullable="false" MaxLength="250" />
+    <Property Type="String" Name="Password" Nullable="false" MaxLength="250" />
+  </ComplexType>
+  <ComplexType Name="Usp_GetAll_SmileStatusMaster_Result">
+    <Property Type="Int32" Name="SmileStatusId" Nullable="false" />
+    <Property Type="String" Name="SmileStatus" Nullable="false" MaxLength="50" />
+    <Property Type="Int32" Name="TotalCount" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="Usp_GetAll_UserSmileMaster_Result">
+    <Property Type="Int32" Name="UserSmileId" Nullable="false" />
+    <Property Type="Binary" Name="FileContent" Nullable="true" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="Email" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="City" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="SmileMade" Nullable="false" MaxLength="500" />
+    <Property Type="Int32" Name="SmileStatusId" Nullable="false" />
+    <Property Type="Int32" Name="TotalCount" Nullable="true" />
+  </ComplexType>
+</Schema>

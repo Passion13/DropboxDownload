@@ -1,0 +1,64 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+.container {
+  width: 80%;
+  margin: 20px auto;
+}
+
+.p {
+  text-align: center;
+  font-size: 14px;
+  padding-top: 140px;
+}
+    </style>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.js"></script>
+
+
+
+
+<script src="@Url.Content("~/Scripts/chart.js")"></script>
+<script>
+    $(document).ready(function () {
+
+        var lineChartData = {
+            labels: ["Cardiovascular: PUSH-UPS", "Napkin Use", "Cleaning: Sink", "Hair Brushing", "Cleaning: Sink", "Hand Washing", "Dresses appropriately for work", "Washing Dishes", "Dresses appropriately for work", "Buttoning", "Hand Washing", "Hair Brushing"],
+            datasets: [{
+                fillColor: "rgba(220,220,220,0)",
+                strokeColor: "rgba(220,180,0,1)",
+                pointColor: "rgba(220,180,0,1)",
+                data: [99, 11, 0, 6, 0, 34, 35, 8, 0]
+            }]
+
+        }
+
+        Chart.defaults.global.animationSteps = 50;
+        Chart.defaults.global.tooltipYPadding = 16;
+        Chart.defaults.global.tooltipCornerRadius = 0;
+        Chart.defaults.global.tooltipTitleFontStyle = "normal";
+        Chart.defaults.global.tooltipFillColor = "rgba(0,160,0,0.8)";
+        Chart.defaults.global.animationEasing = "easeOutBounce";
+        Chart.defaults.global.responsive = true;
+        Chart.defaults.global.scaleLineColor = "black";
+        Chart.defaults.global.scaleFontSize = 16;
+
+        var ctx = document.getElementById("canvas").getContext("2d");
+        var LineChartDemo = new Chart(ctx).Line(lineChartData, {
+            pointDotRadius: 10,
+            bezierCurve: false,
+            scaleShowVerticalLines: false,
+            scaleGridLineColor: "black"
+        });
+    });
+</script>
+<div class="container">
+  <h2>Chart.js Responsive Line Chart Demo</h2>
+  <div>
+    <canvas id="canvas"></canvas>
+  </div>
+</div>
+
+

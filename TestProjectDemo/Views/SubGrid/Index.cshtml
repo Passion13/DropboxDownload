@@ -1,0 +1,37 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<script src="http://code.jquery.com/jquery-1.12.4.min.js"></script> 
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> 
+<script src="http://www.jqueryscript.net/demo/Minimal-Tree-Table-jQuery-Plugin-For-Bootstrap-TreeTable/js/javascript.js"></script>
+<table id="tree-table" class="table table-hover table-bordered">
+    <tbody>
+    <tr><th>#</th>
+      <th>Test</th>
+    </tr><tr data-id="1" data-parent="0" data-level="1">
+      <td data-column="name"><span class="treegrid-indent" style="width:15px"></span><span class="treegrid-expander glyphicon glyphicon-chevron-down"></span>Node 1</td>
+      <td>Additional info</td>
+    </tr>
+    <tr data-id="2" data-parent="1" data-level="2" style="display: table-row;">
+      <td data-column="name"><span class="treegrid-indent" style="width:30px"></span>Node 1</td>
+      <td>Additional info</td>
+    </tr>
+    <tr data-id="3" data-parent="1" data-level="2" style="display: table-row;">
+      <td data-column="name"><span class="treegrid-indent" style="width:30px"></span><span class="treegrid-expander glyphicon glyphicon-chevron-right"></span>Node 1</td>
+      <td>Additional info</td>
+    </tr>
+    <tr data-id="4" data-parent="3" data-level="3" style="display: none;">
+      <td data-column="name"><span class="treegrid-indent" style="width:45px"></span>Node 1</td>
+      <td>Additional info</td>
+    </tr>
+    <tr data-id="5" data-parent="3" data-level="3" style="display: none;">
+      <td data-column="name"><span class="treegrid-indent" style="width:45px"></span>Node 1</td>
+      <td>Additional info</td>
+    </tr>
+      </tbody>
+    
+  </table>

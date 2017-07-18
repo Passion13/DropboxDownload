@@ -1,0 +1,37 @@
+﻿ @model IEnumerable<TestProjectDemo.Models.MyImage>
+@{
+    ViewBag.Title = "List";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+            @{
+                ViewBag.Title = "List";
+            }
+ 
+            <h2>List</h2>
+ 
+            <p>
+                @Html.ActionLink("Create New", "Create")
+            </p>
+            <table>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.FileName)
+                    </th>
+                    <th></th>
+                </tr>
+ 
+            @foreach (var item in Model) 
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FileName)
+                    </td>
+                    
+                </tr>
+            }
+               
+ 
+            </table>
+ 
